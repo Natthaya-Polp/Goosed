@@ -1,47 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public float initialGameSpeed = 5f;
-    public float gameSpeedIncrease = 0.1f;
+    public float initialGameSpeed = 3f;
+    public float gameSpeedIncrease = 0.02f;
     public float gameSpeed { get; private set; }
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hiscoreText;
     public TextMeshProUGUI gameOverText;
     public Button retryButton;
+    public Button backButton;
 
-    private PlayerMovement player;
+    private PlayerEndless player;
     private Spawner spawner;
 
     private float score;
 
     private void Awake()
     {
-        if (Instance != null) {
+        if (Instance != null)
+        {
             DestroyImmediate(gameObject);
-        } else {
+        } 
+        else 
+        {
             Instance = this;
         }
     }
 
     private void OnDestroy()
     {
-        if (Instance == this) {
+        if (Instance == this) 
+        {
             Instance = null;
         }
     }
 
-    private void Start()
+    public void Start()
     {
-        player = FindObjectOfType<PlayerMovement>();
+        player = FindObjectOfType<PlayerEndless>();
         spawner = FindObjectOfType<Spawner>();
 
         NewGame();
@@ -49,9 +55,10 @@ public class GameManager : MonoBehaviour
 
     public void NewGame()
     {
-        Obstacle[] obstacles = FindObjectsOfType<Obstacle>();
+        EndlessObstacle[] obstacles = FindObjectsOfType<EndlessObstacle>();
 
-        foreach (var obstacle in obstacles) {
+        foreach (var obstacle in obstacles)
+        {
             Destroy(obstacle.gameObject);
         }
 
@@ -63,6 +70,7 @@ public class GameManager : MonoBehaviour
         spawner.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(false);
 
         UpdateHiscore();
     }
@@ -76,6 +84,7 @@ public class GameManager : MonoBehaviour
         spawner.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(true);
 
         UpdateHiscore();
     }
@@ -98,5 +107,10 @@ public class GameManager : MonoBehaviour
         }
 
         hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

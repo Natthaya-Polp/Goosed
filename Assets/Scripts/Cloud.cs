@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class Cloud : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
@@ -10,11 +11,11 @@ public class Cloud : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
     }
-    
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        float speed = GameManager.Instance.gameSpeed / transform.localScale.x;
-        meshRenderer.material.mainTextureOffset += Vector2.right * speed * Time.deltaTime;
+        float slow = 0.05f;
+        meshRenderer.material.mainTextureOffset += Vector2.right * slow * Time.deltaTime;
     }
+
 }
