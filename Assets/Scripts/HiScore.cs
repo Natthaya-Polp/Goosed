@@ -11,6 +11,7 @@ public class HiScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         float hiscore = PlayerPrefs.GetFloat("hiscore");
         hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
     }

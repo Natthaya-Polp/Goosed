@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Ground
+  - Spline
   layers:
   - Default
   - TransparentFX

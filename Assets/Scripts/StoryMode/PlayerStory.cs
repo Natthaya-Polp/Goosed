@@ -41,7 +41,9 @@ public class PlayerStory : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(direction));
 
         if (isFacingRight && direction < 0 || !isFacingRight && direction >0 )
+        {
             Flip();
+        }
     }
 
     void Flip()
