@@ -5,11 +5,11 @@ using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
-    //public static bool isGameOver;
-    //public GameObject gameOverScreen;
+    public static bool isGameOver;
+    public GameObject gameOverScreen;
     public GameObject pauseMenuScreen;
 
-    //public static Vector2 lastCheckPointPos = new Vector2(-3,0);
+    public static Vector2 lastCheckPointPos = new Vector2(-9,-1);
 
     //public static int numberOfCoins;
     //public TextMeshProUGUI coinsText;
@@ -18,24 +18,24 @@ public class PlayerManager : MonoBehaviour
     //public GameObject[] playerPrefabs;
     //int characterIndex;
 
-    //private void Awake()
-    //{
+    private void Awake()
+    {
     //    characterIndex =  PlayerPrefs.GetInt("SelectedCharacter", 0);
-    //    GameObject player =  Instantiate(playerPrefabs[characterIndex], lastCheckPointPos, Quaternion.identity);
+        GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos;
     //    VCam.m_Follow = player.transform;
     //    numberOfCoins = PlayerPrefs.GetInt("NumberOfCoins", 0);
-    //    isGameOver = false;
+        isGameOver = false;
 
-    //}
+    }
 
-    //void Update()
-    //{
+    void Update()
+    {
     //    coinsText.text = numberOfCoins.ToString() ;
-    //    if (isGameOver)
-    //    {
-    //        gameOverScreen.SetActive(true);
-    //    }
-    //}
+        if (isGameOver)
+        {
+            gameOverScreen.SetActive(true);
+        }
+    }
 
     public void ReplayLevel()
     {
