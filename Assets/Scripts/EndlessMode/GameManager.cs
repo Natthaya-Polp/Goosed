@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float gameSpeedIncrease = 0.02f;
     public float gameSpeed { get; private set; }
 
+    public TextMeshProUGUI coinText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hiscoreText;
     public TextMeshProUGUI gameOverText;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         spawner = FindObjectOfType<Spawner>();
 
         NewGame();
+        UpdateCoins();
     }
 
     public void NewGame()
@@ -99,6 +101,8 @@ public class GameManager : MonoBehaviour
     private void UpdateHiscore()
     {
         float hiscore = PlayerPrefs.GetFloat("hiscore", 0);
+        hiscore = PlayerPrefs.GetFloat("hiscore");
+        hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
 
         if (score > hiscore)
         {
@@ -107,6 +111,13 @@ public class GameManager : MonoBehaviour
         }
 
         hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
+    }
+
+    public void UpdateCoins()
+    {
+        float coinCount = PlayerPrefs.GetFloat("coinCount");
+        PlayerPrefs.SetFloat("coinCount", coinCount);
+        coinText.text = Mathf.FloorToInt(coinCount).ToString();
     }
 
     public void BackToMenu()

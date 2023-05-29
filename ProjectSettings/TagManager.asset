@@ -9,6 +9,8 @@ TagManager:
   - Spline
   - Enemy
   - Fall
+  - Coin
+  - Chapter1End
   layers:
   - Default
   - TransparentFX

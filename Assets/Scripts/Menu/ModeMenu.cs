@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ModeMenu : MonoBehaviour
 {
-    public void StoryMode()
+    public void Chapter1()
     {
-        SceneManager.LoadScene("StoryMode");
+        SceneManager.LoadScene("Chapter1");
     }
 
     public void EndlessMode()

@@ -5,11 +5,17 @@ using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
+    public TextMeshProUGUI coinText;
+    
     public static bool isGameOver;
+    public static bool isWin;
     public GameObject gameOverScreen;
     public GameObject pauseMenuScreen;
+    public GameObject chapterEndScreen;
 
     public static Vector2 lastCheckPointPos = new Vector2(-9,-1);
+
+    AudioSource audioClip;
 
     //public static int numberOfCoins;
     //public TextMeshProUGUI coinsText;
@@ -21,11 +27,17 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
     //    characterIndex =  PlayerPrefs.GetInt("SelectedCharacter", 0);
-        GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos;
+        
     //    VCam.m_Follow = player.transform;
     //    numberOfCoins = PlayerPrefs.GetInt("NumberOfCoins", 0);
-        isGameOver = false;
+        audioClip = GetComponent <AudioSource>();
 
+        isGameOver = false;
+        isWin = false;
+
+        //Update Coins
+        float coinCount = PlayerPrefs.GetFloat("coinCount");
+        coinText.text = Mathf.FloorToInt(coinCount).ToString();
     }
 
     void Update()
@@ -34,6 +46,13 @@ public class PlayerManager : MonoBehaviour
         if (isGameOver)
         {
             gameOverScreen.SetActive(true);
+        }
+
+        if (isWin)
+        {
+            chapterEndScreen.SetActive(true);
+            audioClip.Play();
+            isWin = false;
         }
     }
 

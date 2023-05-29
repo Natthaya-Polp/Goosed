@@ -19,8 +19,11 @@ public class PlayerStory : MonoBehaviour
     public Rigidbody2D playerRB;
     public Animator animator;
 
+    AudioSource audioClip;
+
     private void Awake()
     {
+        audioClip = GetComponent <AudioSource>();
         controls = new SPlayerControls();
         controls.Enable();
 
@@ -59,7 +62,7 @@ public class PlayerStory : MonoBehaviour
             numberOfJumps = 0;
             playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce);
             numberOfJumps++;
-            //AudioManager.instance.Play("FirstJump");
+            audioClip.Play();
         }
         else
         {
@@ -67,7 +70,7 @@ public class PlayerStory : MonoBehaviour
             {
                 playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce);
                 numberOfJumps++;
-                //AudioManager.instance.Play("SecondJump");
+                audioClip.Play();
             }
         }
     }

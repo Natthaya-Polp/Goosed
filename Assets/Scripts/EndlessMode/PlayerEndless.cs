@@ -15,8 +15,12 @@ public class PlayerEndless : MonoBehaviour
     public Rigidbody2D playerRB;
     //public Animator animator;
 
+    AudioSource audioClip;
+
     private void Awake()
     {
+        audioClip = GetComponent <AudioSource>();
+        
         controls = new EPlayerControls();
         controls.Enable();
 
@@ -35,6 +39,7 @@ public class PlayerEndless : MonoBehaviour
             numberOfJumps = 0;
             playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce);
             numberOfJumps++;
+            audioClip.Play();
         }
         else
         {
@@ -42,6 +47,7 @@ public class PlayerEndless : MonoBehaviour
             {
                 playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce);
                 numberOfJumps++;
+                audioClip.Play();
             }
         }
     }
